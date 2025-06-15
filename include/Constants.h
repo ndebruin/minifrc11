@@ -9,51 +9,47 @@
 #define backLeftMotorChannel 6
 #define backRightMotorChannel 2 
 
-#define kS 0.7 // minimum value to overcome friction 
+constexpr double kS = 0.0; // minimum value to overcome friction 
                // determined experimentally
 
-#define driveExp 1.5 // control "squaring" value to get more control at the low end
-
-#define correctCount 10
+constexpr double driveExp = 1.5; // control "squaring" value to get more control at the low end
 
 // strafe parameters
-#define linX_kS 0.1 //0.01
-#define linX_kP 0.05 //0.01
-#define linX_kI 0.0
-#define linX_kD 0.0
+constexpr double linX_kS = 0.0;
+constexpr double linX_kP = 0.0;
+constexpr double linX_kI = 0.0;
+constexpr double linX_kD = 0.0;
 
-#define x_AcceptableError 0.2 // inches
+constexpr double x_AcceptableError = 0.0; // mm
 
 // forward back parameters
-#define linY_kS 0.1 //0.01
-#define linY_kP 0.05 //0.01
-#define linY_kI 0.0
-#define linY_kD 0.0
+constexpr double linY_kS = 0.0;
+constexpr double linY_kP = 0.0;
+constexpr double linY_kI = 0.0;
+constexpr double linY_kD = 0.0;
 
-#define y_AcceptableError 0.2 // inches
+constexpr double y_AcceptableError = 0.0; // mm
 
 // turn parameters
-#define angZ_kS 0.001
-#define angZ_kP 0.000000000000000000001
-#define angZ_kI 0.0
-#define angZ_kD 0.0
+constexpr double angZ_kS = 0.0;
+constexpr double angZ_kP = 0.0;
+constexpr double angZ_kI = 0.0;
+constexpr double angZ_kD = 0.0;
 
-#define theta_AcceptableError 10.0 // degrees
+constexpr double theta_AcceptableError =  0.0; // degrees
 
 
 ////////////////////////////////////////////////////////////////////// Controller //////////////////////////////////////////////////////////////////////
 
-#define deadzoneValue 0.1
+constexpr double deadzoneValue = 0.1;
 
-#define axisLinY 1
-#define axisLinX 0
-#define axisAngZ 2
-
-
+constexpr uint8_t axisLinY = 1;
+constexpr uint8_t axisLinX = 0;
+constexpr uint8_t axisAngZ = 2;
 
 ////////////////////////////////////////////////////////////////////// Pose Estimator //////////////////////////////////////////////////////////////////////
-#define DPI 600.0 // 250 Dots per inch NEED TO TUNE
+constexpr double DPI = 600.0; // 250 Dots per inch NEED TO TUNE
 
-constexpr float MOUSE_CONVERSION_FACTOR = (1.0/DPI); 
+constexpr double MOUSE_CONVERSION_FACTOR = (1.0/DPI); 
 
-#define baudRate 115200
+constexpr uint baudRate = 115200;
