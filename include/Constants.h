@@ -86,7 +86,7 @@ constexpr uint8_t climberServoChannel = 3;
 
 constexpr uint8_t algaeArmServoChannel = 5;
 
-constexpr float algaeStartAngle = 90.0;
+constexpr float algaeStartingConfigAngle = 90.0; // only used for legality (& maybe climb)
 constexpr float algaeStowAngle = 90.0;
 constexpr float algaeInitialDeployAngle = 90.0;
 constexpr float algaeFinalDeployAngle = 90.0;
