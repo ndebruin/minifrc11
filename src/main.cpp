@@ -17,6 +17,9 @@
 // not really hardare but very needed
 StateStorage state;
 
+NoU_Servo algaeArm(algaeArmServoChannel);
+// NoU_Servo climberServo(climberServoChannel);
+
 ////////////////////////////////////////////////////////////////////// Function Declerations //////////////////////////////////////////////////////////////////////
 
 void asyncUpdate();
@@ -31,6 +34,8 @@ void updatePestoLink();
 ////////////////////////////////////////////////////////////////////// Global Variables //////////////////////////////////////////////////////////////////////
 
 
+constexpr double degreeToUS = (2500.0-500.0)/(300.0);
+
 ////////////////////////////////////////////////////////////////////// setup() //////////////////////////////////////////////////////////////////////
 
 void setup()
@@ -43,16 +48,14 @@ void setup()
 
   PestoLink.begin(robotName);
 
-  // start RSL
-  RSL::initialize();
-
   // start subsystems
-
+  
 
   // start our pose estimator
   
   
   // start advanced controllers
+  
 
 }
 
@@ -61,6 +64,20 @@ void setup()
 void loop() 
 {
   asyncUpdate(); // updates all the things that need to be updated every loop regardless of anything else
+
+  // if(PestoLink.buttonHeld(0)){
+  //   climberServo.writeMicroseconds(1000);
+  // }
+  // if(PestoLink.buttonHeld(1)){
+  //   climberServo.writeMicroseconds(2500);
+  // }
+  if(PestoLink.buttonHeld(0)){
+    algaeArm.writeMicroseconds(1510);
+  }
+  if(PestoLink.buttonHeld(1)){
+    algaeArm.writeMicroseconds(2000);
+  }
+
 
 
 }
@@ -82,17 +99,6 @@ void asyncUpdate(){
 
   // update pestolink telem
   updatePestoLink();
-
-
-  // rsl code
-  RSL::update();
-
-  // if(state.isEnabled()){
-  //   RSL::setState(RSL_ENABLED);
-  // }
-  // else if(!state.isEnabled()){
-  //   RSL::setState(RSL_OFF);
-  // }
 
 }
 
