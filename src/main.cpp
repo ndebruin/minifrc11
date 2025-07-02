@@ -8,7 +8,10 @@
 
 #include "Constants.h"
 #include "State.h"
+#include "Util.h"
+
 #include "OdomInterface.h"
+#include "Sensor.h"
 
 // subsystems
 #include "Drivetrain.h"
@@ -20,9 +23,11 @@ StateStorage state;
 
 // Sensor declerations
 OdomSensor odom(&Wire);
+Sensor EESensor(EESensorPin);
+Sensor groundSensor(GroundSensorPin);
 
 // subsystem declerations
-Drivetrain drivetrain = Drivetrain(&state, &odom, frontLeftMotorChannel, frontRightMotorChannel, backLeftMotorChannel, backRightMotorChannel);
+Drivetrain drivetrain(&state, &odom, frontLeftMotorChannel, frontRightMotorChannel, backLeftMotorChannel, backRightMotorChannel);
 
 
 
@@ -41,8 +46,6 @@ void updatePestoLink();
 ////////////////////////////////////////////////////////////////////// Global Variables //////////////////////////////////////////////////////////////////////
 
 
-constexpr double degreeToUS = (2500.0-500.0)/(300.0);
-
 ////////////////////////////////////////////////////////////////////// setup() //////////////////////////////////////////////////////////////////////
 
 void setup()
@@ -59,6 +62,8 @@ void setup()
   // start sensors
   Wire.begin();
   odom.begin();
+  EESensor.begin();
+  groundSensor.begin();
 
   // configure subsystems
   configureSubsystems();
