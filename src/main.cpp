@@ -8,21 +8,28 @@
 
 #include "Constants.h"
 #include "State.h"
+#include "OdomInterface.h"
+
+// subsystems
+#include "Drivetrain.h"
 
 ////////////////////////////////////////////////////////////////////// Hardware Declarations //////////////////////////////////////////////////////////////////////
 
-// BluetoothSerial SerialBluetooth; // bluetooth link
-
-
-// not really hardare but very needed
+// not really hardware but very needed
 StateStorage state;
 
-NoU_Servo algaeArm(algaeArmServoChannel);
-// NoU_Servo climberServo(climberServoChannel);
+// Sensor declerations
+OdomSensor odom(&Wire);
+
+// subsystem declerations
+Drivetrain drivetrain = Drivetrain(&state, &odom, frontLeftMotorChannel, frontRightMotorChannel, backLeftMotorChannel, backRightMotorChannel);
+
+
 
 ////////////////////////////////////////////////////////////////////// Function Declerations //////////////////////////////////////////////////////////////////////
 
 void asyncUpdate();
+void configureSubsystems();
 
 double deadzone(double raw, double minValue);
 void constantButtons();
@@ -46,13 +53,22 @@ void setup()
 
   // Serial.begin(9600);
 
+  // start DS comms
   PestoLink.begin(robotName);
 
-  // start subsystems
-  
+  // start sensors
+  Wire.begin();
+  odom.begin();
 
-  // start our pose estimator
+  // configure subsystems
+  configureSubsystems();
   
+  // start subsystems
+  drivetrain.begin();
+  // superStructure.begin();
+  // intake.begin();
+  // algaeArm.begin();
+  // climber.begin();
   
   // start advanced controllers
   
@@ -64,20 +80,6 @@ void setup()
 void loop() 
 {
   asyncUpdate(); // updates all the things that need to be updated every loop regardless of anything else
-
-  // if(PestoLink.buttonHeld(0)){
-  //   climberServo.writeMicroseconds(1000);
-  // }
-  // if(PestoLink.buttonHeld(1)){
-  //   climberServo.writeMicroseconds(2500);
-  // }
-  if(PestoLink.buttonHeld(0)){
-    algaeArm.writeMicroseconds(1510);
-  }
-  if(PestoLink.buttonHeld(1)){
-    algaeArm.writeMicroseconds(2000);
-  }
-
 
 
 }
@@ -113,4 +115,10 @@ double deadzone(double raw, double minValue){
 }
 
 
+void configureSubsystems()
+{
+  drivetrain.setKV(kV);
+  drivetrain.setTeleopInputs(driveExp, deadzoneValue);
 
+
+}

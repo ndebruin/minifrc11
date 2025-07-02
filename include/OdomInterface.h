@@ -20,7 +20,7 @@ class OdomSensor
         {
             // we are gonna make them start the wire seperately
             // so this does basically nothing
-            update();
+            return update();
         }
 
         uint8_t update()
@@ -32,9 +32,9 @@ class OdomSensor
 
         Pose2D getPose(){ return currentPose; };
 
-        uint8_t zeroYaw(){ requestYawReset(); };
+        uint8_t zeroYaw(){ requestYawReset(); return 0; };
 
-        uint8_t resetPose(Pose2D setPose){ requestPoseReset(setPose); };
+        uint8_t resetPose(Pose2D setPose){ requestPoseReset(setPose); return 0; };
 
     private:
         TwoWire *interface;
