@@ -22,8 +22,14 @@ enum FieldSide
 enum GamePiece 
 {
     None = 0,
-    Coral = 1,
-    Algae = 2
+    CoralGround = 1,
+    CoralEE = 2
+};
+
+enum ScoreSide
+{
+    Forward = 0,
+    Backward = 1
 };
  
 // the numbers fundamentally don't matter bc we will just use the names
@@ -32,15 +38,19 @@ enum MechState
 {
     // stow states
     StowedEmpty = 0,
-    StowedCoral = 1,
-    StowedAlgae = 2,
+    StowedCoralGround = 1,
+    StowedCoralEE =2,
     
     Stopped = 99,
 
     // coral scoring states
-    L1Traveling = 10,
-    L1Ready = 11,
-    L1Scoring = 12,
+    L1EETraveling = 10,
+    L1EEReady = 11,
+    L1EEScoring = 12,
+
+    L1GroundTraveling = 15,
+    L1GroundReady = 16,
+    L1GroundScoring = 17,
 
     L2Traveling = 20,
     L2Ready = 21,
@@ -55,27 +65,21 @@ enum MechState
     L4Scoring = 42, 
 
     // intake states
-    SlowCoralIntake = 50,
-    FastCoralIntake = 51,
-    ReverseCoralIntake = 52,
+    GroundIntakeDeployed = 50,
+    GroundIntakeEjecting = 51,
+    StationIntakeDeployed = 52,
 
-    AlgaeIntakeL2 = 55,
-    AlgaeIntakeL3 = 56,
-    AlgaeIntakeLollypop = 57,
-    AlgaeIntakeGround = 58,
+    // de-algae states
+    DeAlgaeL2Ready = 60,
+    DeAlgaeL2Scoring = 61,
 
-    // algae scoring states
-    ProcessorTraveling = 60,
-    ProcessorReady = 61,
-    ProcessorScoring = 62,
-
-    BargeTraveling = 70,
-    BargeReady = 71,
-    BargeScoring = 72,
+    DeAlgaeL3Ready = 70,
+    DeAlgaeL3Scoring = 71,
     
-    // climbing states
+    // climbing states    
     ClimbDeployed = 90,
     ClimbRetracted = 91
+
 };
 
 // robot or field oriented
@@ -103,12 +107,14 @@ class StateStorage
         MechState getMechState(){return mechState;};
         DrivetrainOrientation getOrientation(){return drivetrainMoment;};
         Auton getAuto(){return auton;};
+        ScoreSide getScoringSide(){return scoreSide;};
 
         void setRobotState(RobotState state){ robotState = state; };
         void setFieldSide(FieldSide side){ fieldSide = side; };
         void setMechstate(MechState state){ mechState = state; };
         void setAuto(Auton autoMode){ auton = autoMode; };
         void setOrientation(DrivetrainOrientation orientation){ drivetrainMoment = orientation; };
+        void setScoreSide(ScoreSide Scoreside){ scoreSide = Scoreside; };
 
 
     private:
@@ -117,4 +123,5 @@ class StateStorage
         MechState mechState;
         DrivetrainOrientation drivetrainMoment;
         Auton auton;
+        ScoreSide scoreSide;
 };
