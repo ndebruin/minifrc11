@@ -6,8 +6,8 @@
 // #include <AlfredoConnect.h>
 #include <PestoLink-Receive.h>
 
-#include "Constants.h"
-#include "State.h"
+#include "RobotConfig.h"
+#include "RobotState.h"
 #include "Util.h"
 
 #include "OdomInterface.h"
@@ -19,7 +19,7 @@
 ////////////////////////////////////////////////////////////////////// Hardware Declarations //////////////////////////////////////////////////////////////////////
 
 // not really hardware but very needed
-StateStorage state;
+RobotStateStorage state;
 
 // Sensor declerations
 OdomSensor odom(&Wire);

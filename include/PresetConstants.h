@@ -1,0 +1,70 @@
+#pragma once
+
+#include <Arduino.h>
+
+// This files contains all tuning parameters, for control loops or preset positions
+
+////////////////////////////////////////////////////////////////////// Drivetrain //////////////////////////////////////////////////////////////////////
+
+constexpr double kV = 0.0; // minimum value to overcome friction 
+               // determined experimentally
+
+constexpr double driveExp = 1.5; // control "squaring" value to get more control at the low end
+
+// strafe parameters
+constexpr double linX_kS = 0.0;
+constexpr double linX_kP = 0.0;
+constexpr double linX_kI = 0.0;
+constexpr double linX_kD = 0.0;
+
+constexpr double x_AcceptableError = 0.0; // mm
+
+// forward back parameters
+constexpr double linY_kS = 0.0;
+constexpr double linY_kP = 0.0;
+constexpr double linY_kI = 0.0;
+constexpr double linY_kD = 0.0;
+
+constexpr double y_AcceptableError = 0.0; // mm
+
+// turn parameters
+constexpr double angZ_kS = 0.0;
+constexpr double angZ_kP = 0.0;
+constexpr double angZ_kI = 0.0;
+constexpr double angZ_kD = 0.0;
+
+constexpr double theta_AcceptableError =  0.0; // degrees
+
+
+////////////////////////////////////////////////////////////////////// Intake //////////////////////////////////////////////////////////////////////
+
+constexpr float intakeStowAngle = 90.0;
+constexpr float intakeDeployAngle = 90.0;
+constexpr float intakeHandoffAngle = 90.0;
+
+constexpr uint16_t intakeThresholdValue = 2048;
+
+
+////////////////////////////////////////////////////////////////////// Intake //////////////////////////////////////////////////////////////////////
+
+constexpr uint16_t eeThresholdValue = 2048;
+
+
+////////////////////////////////////////////////////////////////////// Elevator //////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////// Arm //////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////// Climber //////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////// De-Algae Arm //////////////////////////////////////////////////////////////////////
+
+constexpr float algaeStartingConfigAngle = 90.0; // only used for legality (& maybe climb)
+constexpr float algaeStowAngle = 90.0;
+constexpr float algaeInitialDeployAngle = 90.0;
+constexpr float algaeFinalDeployAngle = 90.0;

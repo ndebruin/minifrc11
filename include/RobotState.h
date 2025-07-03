@@ -3,7 +3,7 @@
 #include <Arduino.h>
 
 // what state is the robot in?
-enum RobotState 
+enum RobotRunState 
 {
     ESTOP = -1,
     Disabled = 0,
@@ -56,18 +56,18 @@ enum Auton
 };
 
 
-class StateStorage
+class RobotStateStorage
 {
     public:
         bool isEnabled(){return robotState > 0;};
 
-        RobotState getRobotState(){return robotState;};
+        RobotRunState getRobotRunState(){return robotState;};
         FieldSide getFieldSide(){return fieldSide;};
         DrivetrainOrientation getOrientation(){return drivetrainMoment;};
         Auton getAuto(){return auton;};
         ScoreSide getScoringSide(){return scoreSide;};
 
-        void setRobotState(RobotState state){ robotState = state; };
+        void setRobotRunState(RobotRunState state){ robotState = state; };
         void setFieldSide(FieldSide side){ fieldSide = side; };
         void setAuto(Auton autoMode){ auton = autoMode; };
         void setOrientation(DrivetrainOrientation orientation){ drivetrainMoment = orientation; };
@@ -75,7 +75,7 @@ class StateStorage
 
 
     private:
-        RobotState robotState;
+        RobotRunState robotState;
         FieldSide fieldSide;
         DrivetrainOrientation drivetrainMoment;
         Auton auton;
