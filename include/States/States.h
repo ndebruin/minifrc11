@@ -70,7 +70,7 @@ enum StateId {
     ID_L1EEWait, // wait until moved back from reef, odom
     ID_L1EERetract1, // elevator up, time delay
     ID_L1EERetract2, // arm down, time delay
-    ID_L1EEREtract3, // elevator down, time delay
+    ID_L1EERetract3, // elevator down, time delay
     // if no coral, move to stowedEmpty, if still have coral, move to stowedEE
 
     // L2 States
@@ -81,7 +81,7 @@ enum StateId {
     ID_L2Wait, // wait until moved back from reef, odom
     ID_L2Retract1, // elevator up, time delay
     ID_L2Retract2, // arm down, time delay
-    ID_L2REtract3, // elevator down, time delay
+    ID_L2Retract3, // elevator down, time delay
     // if no coral, move to stowedEmpty, if still have coral, move to stowedEE
 
     // L3 States
@@ -92,7 +92,7 @@ enum StateId {
     ID_L3Wait, // wait until moved back from reef, odom
     ID_L3Retract1, // elevator up, time delay
     ID_L3Retract2, // arm down, time delay
-    ID_L3REtract3, // elevator down, time delay
+    ID_L3Retract3, // elevator down, time delay
     // if no coral, move to stowedEmpty, if still have coral, move to stowedEE
 
     // L4 States
@@ -101,7 +101,7 @@ enum StateId {
     ID_L4Score, // move arm, until sensor or timeout
     ID_L4Wait, // wait until moved back from reef, odom
     ID_L4Retract2, // arm down, time delay
-    ID_L4REtract3, // elevator down, time delay
+    ID_L4Retract3, // elevator down, time delay
     // if no coral, move to stowedEmpty, if still have coral, move to stowedEE
 
     // Ground -> EE transfer states
@@ -313,8 +313,8 @@ class L1EERetract2 : public State {
     STATE_INNER(L1EERetract2)
 };
 
-class L1EEREtract3 : public State {
-    STATE_INNER(L1EEREtract3)
+class L1EERetract3 : public State {
+    STATE_INNER(L1EERetract3)
 };
 
 class L2Deploy1 : public State {
@@ -345,8 +345,8 @@ class L2Retract2 : public State {
     STATE_INNER(L2Retract2)
 };
 
-class L2REtract3 : public State {
-    STATE_INNER(L2REtract3)
+class L2Retract3 : public State {
+    STATE_INNER(L2Retract3)
 };
 
 class L3Deploy1 : public State {
@@ -377,8 +377,8 @@ class L3Retract2 : public State {
     STATE_INNER(L3Retract2)
 };
 
-class L3REtract3 : public State {
-    STATE_INNER(L3REtract3)
+class L3Retract3 : public State {
+    STATE_INNER(L3Retract3)
 };
 
 class L4Deploy1 : public State {
@@ -401,8 +401,8 @@ class L4Retract2 : public State {
     STATE_INNER(L4Retract2)
 };
 
-class L4REtract3 : public State {
-    STATE_INNER(L4REtract3)
+class L4Retract3 : public State {
+    STATE_INNER(L4Retract3)
 };
 
 class EETransfer1 : public State {
