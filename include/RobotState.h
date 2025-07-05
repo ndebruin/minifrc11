@@ -18,14 +18,6 @@ enum FieldSide
     Red = 1
 };
 
-// what gamepiece are we holding rn?
-enum GamePiece 
-{
-    None = 0,
-    CoralGround = 1,
-    CoralEE = 2
-};
-
 // which side of the robot are we scoring off of?
 enum ScoreSide
 {
