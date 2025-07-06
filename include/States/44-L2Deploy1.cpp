@@ -2,6 +2,7 @@
 
 void L2Deploy1::initialize_impl() {
     ctx->elevatorServo.writeMicroseconds(elevatorClearEEPosition);
+    // TO:DO: add autoalign start based on which trigger pressed
 }
 
 State* L2Deploy1::loop_impl() {

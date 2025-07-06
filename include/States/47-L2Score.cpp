@@ -2,7 +2,7 @@
 
 void L2Score::initialize_impl() {
     ctx->armServo.write(armL2ScoreAngle);
-    ctx->driveTrainController.stopAutoAlign();
+    ctx->driveTrainController.stopAutoalign();
 }
 
 State* L2Score::loop_impl() {

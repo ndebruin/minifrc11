@@ -26,7 +26,7 @@ constexpr long autoAlignTimeout = 1000;
 // elevator
 constexpr long elevatorClearIntakeTime = 1000;
 constexpr long elevatorClearEETime = 1000;
-constexpr long elevatorDownTime = 1000;
+constexpr long elevatorDownTime = 1000; // all small movements (L1 - L3, handoff, clearing intake)
 constexpr long elevatorL4Time = 1000; // also used for down
 constexpr long elevatorDealgaeL3Time = 1000;
 
@@ -44,6 +44,7 @@ constexpr long armScoreTimeout = 1000;
 constexpr long intakeDeployTime = 1000;
 constexpr long intakeRetractTime = 1000;
 constexpr long intakeHandoffTime = 1000;
+constexpr long handoffTimeout = 1000;
 constexpr long intakeL1Time = 1000;
 constexpr long intakeScoreTimeout = 1000;
 
@@ -68,12 +69,13 @@ constexpr float intakeL1ScoreAngle = 90.0;
 //////////////////////////////////////////// EE/Intake Roller //////////////////////////////////////////////////////////////////////
 
 constexpr float intakeRollerIntakeSpeed = -1.0;
-constexpr float intakeRollerHandoffSpeed = -1.0;
 constexpr float intakeRollerL1ScoreSpeed = 1.0;
 
 constexpr float eeRollerIntakeSpeed = 1.0;
-constexpr float eeRollerHandoffSpeed = 1.0;
 constexpr float eeRollerL1ScoreSpeed = -1.0;
+
+constexpr float rollerEEHandoffSpeed = 1.0; // ground -> EE
+constexpr float rollerGroundHandoffSpeed = -1.0; // EE -> ground
 
 ////////////////////////////////////////////////////////////////////// Elevator //////////////////////////////////////////////////////////////////////
 
@@ -81,8 +83,8 @@ constexpr uint16_t elevatorBottomPosition = 1500;
 constexpr uint16_t elevatorClearIntakePosition = 1500;
 constexpr uint16_t elevatorClearEEPosition = 1500;
 
-constexpr uint16_t elevatorHandoffHighPosition = 1500;
-constexpr uint16_t elevatorHandoffLowPosition = 1500;
+constexpr uint16_t elevatorHandoffHighPosition = 1500; // clear everything pos
+constexpr uint16_t elevatorHandoffLowPosition = 1500; // actual handoff pos.
 
 constexpr uint16_t elevatorL4Position = 1500;
 

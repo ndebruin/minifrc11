@@ -2,7 +2,7 @@
 
 void L3Score::initialize_impl() {
     ctx->armServo.write(armL3ScoreAngle);
-    ctx->driveTrainController.stopAutoAlign();
+    ctx->driveTrainController.stopAutoalign();
 }
 
 State* L3Score::loop_impl() {

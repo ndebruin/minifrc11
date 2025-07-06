@@ -14,13 +14,13 @@ State* L1EEDeploy3::loop_impl() {
     */
 
     // safety timeout for if autoalign is messed up
-    if(this->currentTime >= deAlgaeTimeout && requestRemoved){
-        return new L1EEScore(this->ctx);
+    if(this->currentTime >= autoAlignTimeout && requestRemoved){
+        return new L1GroundScore(this->ctx);
     }
 
     
     if(ctx->drivetrainController.inPosition() && requestRemoved){
-        return new L1EEScore(this->ctx);
+        return new L1GroundScore(this->ctx);
     }
 
     return nullptr;

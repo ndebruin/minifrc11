@@ -1,6 +1,8 @@
 #include "States.h"
 
-void L1EEWait::initialize_impl() {}
+void L1EEWait::initialize_impl() {
+    ctx->intakeEEMotor.set(0.0);
+}
 
 State* L1EEWait::loop_impl() {
     // if we're out of the area (assuming odom works)

@@ -2,7 +2,7 @@
 
 void L4Score::initialize_impl() {
     ctx->armServo.write(armL4ScoreAngle);
-    ctx->driveTrainController.stopAutoAlign();
+    ctx->driveTrainController.stopAutoalign();
 }
 
 State* L4Score::loop_impl() {
