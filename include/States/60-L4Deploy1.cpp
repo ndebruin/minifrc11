@@ -9,7 +9,7 @@ State* L4Deploy1::loop_impl() {
         return new L4Deploy2(this->ctx);
     }
 
-    if(requestRemoved){
+    if(!ctx->inputs.shouldExecute()){
         return new L4Retract3(this->ctx);
     }
     

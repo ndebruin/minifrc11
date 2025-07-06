@@ -9,7 +9,7 @@ State* L3Deploy1::loop_impl() {
         return new L3Deploy2(this->ctx);
     }
 
-    if(requestRemoved){
+    if(!ctx->inputs.shouldExecute()){
         return new L3Retract3(this->ctx);
     }
     

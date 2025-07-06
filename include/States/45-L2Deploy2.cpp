@@ -10,7 +10,7 @@ State* L2Deploy2::loop_impl() {
         return new L2Deploy3(this->ctx);
     }
 
-    if(requestRemoved){
+    if(!ctx->inputs.shouldExecute()){
         return new L2Retract2(this->ctx);
     }
 

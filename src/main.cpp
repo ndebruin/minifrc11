@@ -109,9 +109,6 @@ void asyncUpdate(){
 
 }
 
-void updatePestoLink(){
-}
-
 double deadzone(double raw, double minValue){
   if(fabs(raw) < minValue){
     return 0.0;
@@ -122,8 +119,8 @@ double deadzone(double raw, double minValue){
 
 void configureSubsystems()
 {
-  drivetrain.setKV(kV);
-  drivetrain.setTeleopInputs(driveExp, deadzoneValue);
+  // drivetrain.setKV(kV);
+  // drivetrain.setTeleopInputs(driveExp, deadzoneValue);
 
 
 }

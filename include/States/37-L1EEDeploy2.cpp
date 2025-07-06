@@ -9,7 +9,7 @@ State* L1EEDeploy2::loop_impl() {
         return new L1EEDeploy3(this->ctx);
     }
 
-    if(requestRemoved){
+    if(!ctx->inputs.shouldExecute()){
         return new L1EERetract2(this->ctx);
     }
 

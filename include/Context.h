@@ -6,6 +6,7 @@
 #include "RobotState.h"
 #include "Sensor.h"
 #include "OdomInterface.h"
+#include "InputParser.h"
 
 struct Context {
     // actuators
@@ -25,6 +26,8 @@ struct Context {
 
     // Odom
     OdomSensor odomSensor;
+
+    InputParser inputs;
 
     // most other stuff (values for actuators) 
     // is pulled from "PresetConstants.h"

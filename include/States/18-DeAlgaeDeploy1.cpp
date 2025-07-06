@@ -13,7 +13,7 @@ State* DeAlgaeDeploy1::loop_impl() {
         return new DeAlgaeDeployed(this->ctx);
     }
 
-    if(requestRemoved){
+    if(!ctx->inputs.shouldExecute()){
         return new DeAlgaeRetract1(this->ctx);
     }
     

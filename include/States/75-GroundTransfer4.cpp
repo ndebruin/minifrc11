@@ -6,7 +6,7 @@ void GroundTransfer4::initialize_impl() {
 
 State* GroundTransfer4::loop_impl() {
     // adding a request removed here stops us from getting into an infinite loop
-    if(ctx->groundSensor.getState() || requestRemoved){
+    if(ctx->groundSensor.getState() || !ctx->inputs.shouldExecute()){
         return new GroundTransfer5(this->ctx);
     }
     // if we time out, run through the other side

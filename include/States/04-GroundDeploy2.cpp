@@ -9,7 +9,7 @@ State* GroundDeploy2::loop_impl() {
         return new GroundDeploy3(this->ctx);
     }
 
-    if(requestReleased){
+    if(!ctx->inputs.shouldExecute()){
         return new GroundRetract2(this->ctx);
     }
 

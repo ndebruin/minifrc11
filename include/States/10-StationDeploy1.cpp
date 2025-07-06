@@ -10,7 +10,7 @@ State* StationDeploy1::loop_impl() {
         return new StationDeploy2(this->ctx);
     }
 
-    if(requestReleased){
+    if(!ctx->inputs.shouldExecute()){
         return new StationRetract3(this->ctx);
     }
     

@@ -7,7 +7,7 @@ void EETransfer3::initialize_impl() {
 State* EETransfer3::loop_impl() {
     // if we've passed off sucessfully
     // adding a removedRequest here stops us from infinite loop
-    if(ctx->eeSensor.getState() || requestRemoved){
+    if(ctx->eeSensor.getState() || !ctx->inputs.shouldExecute()){
         return new EETransfer4(this->ctx);
     }
     if(this->currentTime >= handoffTimeout){

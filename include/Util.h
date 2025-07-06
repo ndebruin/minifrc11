@@ -2,6 +2,42 @@
 
 #include <Arduino.h>
 
+// which side of the robot are we scoring off of?
+enum ScoreSide
+{
+    Forward = 0,
+    Backward = 1
+};
+
+// where on the reef are we scoring on?
+enum ReefSide
+{
+    Left,
+    Center,
+    Right
+};
+
+enum ReefHeight
+{
+    L1Trough,
+    L2Branch,
+    L3Branch,
+    L4Branch
+};
+
+enum Goal
+{
+    L1Ground,
+    L1EE,
+    L2,
+    L3,
+    L4,
+    GroundIntake,
+    DeAlgaefy,
+    StationIntake,
+    Climb
+};
+
 // pose and positional stuff
 struct Pose2D {
     double x; 

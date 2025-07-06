@@ -8,7 +8,7 @@ State* StationDeployed::loop_impl() {
     if(ctx->eeSensor.getState()){
         return new StationWait(this->ctx);
     }
-    if(requestRemoved){
+    if(!ctx->inputs.shouldExecute()){
         return new StationWait(this->ctx);
     }
 

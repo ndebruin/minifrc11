@@ -14,12 +14,12 @@ State* L2Deploy3::loop_impl() {
     */
 
     // safety timeout for if autoalign is messed up
-    if(this->currentTime >= autoAlignTimeout && requestRemoved){
+    if(this->currentTime >= autoAlignTimeout && !ctx->inputs.shouldExecute()){
         return new L2Score(this->ctx);
     }
 
     
-    if(ctx->drivetrainController.inPosition() FULL_AUTO requestRemoved){
+    if(ctx->drivetrainController.inPosition() FULL_AUTO !ctx->inputs.shouldExecute()){
         return new L2Score(this->ctx);
     }
     

@@ -18,27 +18,9 @@ enum FieldSide
     Red = 1
 };
 
-// which side of the robot are we scoring off of?
-enum ScoreSide
-{
-    Forward = 0,
-    Backward = 1
-};
 
-// which side of the reef are we scoring on?
-enum reefSide
-{
-    Left = 0,
-    Center = 1,
-    Right = 2
-};
 
-// robot or field oriented
-enum DrivetrainOrientation 
-{
-    RobotOriented = 0,
-    FieldOriented = 1
-};
+
 
 // autons!
 enum Auton 
@@ -53,23 +35,7 @@ class RobotStateStorage
     public:
         bool isEnabled(){return robotState > 0;};
 
-        RobotRunState getRobotRunState(){return robotState;};
-        FieldSide getFieldSide(){return fieldSide;};
-        DrivetrainOrientation getOrientation(){return drivetrainMoment;};
-        Auton getAuto(){return auton;};
-        ScoreSide getScoringSide(){return scoreSide;};
-
-        void setRobotRunState(RobotRunState state){ robotState = state; };
-        void setFieldSide(FieldSide side){ fieldSide = side; };
-        void setAuto(Auton autoMode){ auton = autoMode; };
-        void setOrientation(DrivetrainOrientation orientation){ drivetrainMoment = orientation; };
-        void setScoreSide(ScoreSide Scoreside){ scoreSide = Scoreside; };
-
-
-    private:
         RobotRunState robotState;
         FieldSide fieldSide;
-        DrivetrainOrientation drivetrainMoment;
         Auton auton;
-        ScoreSide scoreSide;
 };

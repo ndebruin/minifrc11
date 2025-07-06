@@ -14,12 +14,12 @@ State* L1EEDeploy3::loop_impl() {
     */
 
     // safety timeout for if autoalign is messed up
-    if(this->currentTime >= autoAlignTimeout && requestRemoved){
+    if(this->currentTime >= autoAlignTimeout && !ctx->inputs.shouldExecute()){
         return new L1GroundScore(this->ctx);
     }
 
     
-    if(ctx->drivetrainController.inPosition() && requestRemoved){
+    if(ctx->drivetrainController.inPosition() && !ctx->inputs.shouldExecute()){
         return new L1GroundScore(this->ctx);
     }
 

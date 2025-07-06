@@ -10,7 +10,7 @@ State* L1GroundDeploy1::loop_impl() {
         return new L1GroundDeploy2(this->ctx);
     }
 
-    if(requestRemoved){
+    if(!ctx->inputs.shouldExecute()){
         return new L1GroundRetract3(this->ctx);
     }
 
