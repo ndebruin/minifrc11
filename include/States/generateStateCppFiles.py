@@ -12,13 +12,13 @@ enum_values = [
     "L1GroundDeploy1", "L1GroundDeploy2", "L1GroundDeploy3", "L1GroundScore",
     "L1GroundRetract1", "L1GroundRetract2", "L1GroundRetract3",
     "L1EEDeploy1", "L1EEDeploy2", "L1EEDeploy3", "L1EEScore", "L1EEWait",
-    "L1EERetract1", "L1EERetract2", "L1EEREtract3",
+    "L1EERetract1", "L1EERetract2", "L1EERetract3",
     "L2Deploy1", "L2Deploy2", "L2Deploy3", "L2Score", "L2Wait",
-    "L2Retract1", "L2Retract2", "L2REtract3",
+    "L2Retract1", "L2Retract2", "L2Retract3",
     "L3Deploy1", "L3Deploy2", "L3Deploy3", "L3Score", "L3Wait",
-    "L3Retract1", "L3Retract2", "L3REtract3",
+    "L3Retract1", "L3Retract2", "L3Retract3",
     "L4Deploy1", "L4Deploy2", "L4Score", "L4Wait",
-    "L4Retract2", "L4REtract3",
+    "L4Retract2", "L4Retract3",
     "EETransfer1", "EETransfer2", "EETransfer3", "EETransfer4", "EETransfer5", "EETransfer6",
     "GroundTransfer1", "GroundTransfer2", "GroundTransfer3", "GroundTransfer4", "GroundTransfer5", "GroundTransfer6"
 ]

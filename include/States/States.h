@@ -1,9 +1,10 @@
 #pragma once
 
-#include "../Context.h"
+#include <Arduino.h>
 #include "../../boilerplate/StateMachine/State.h"
 #include "../../boilerplate/StateMachine/StateMachine.h"
-#include <Arduino.h>
+#include "../Context.h"
+#include "../../consts/PresetConstants.h"
 
 enum StateId {
     /* 
@@ -223,6 +224,8 @@ class DeAlgaeDeployed : public State {
 
 class DeAlgaefy : public State {
     STATE_INNER(DeAlgaefy)
+
+    uint8_t counter = 9;
 };
 
 class DeAlgaeRetract1 : public State {
@@ -452,5 +455,3 @@ class GroundTransfer5 : public State {
 class GroundTransfer6 : public State {
     STATE_INNER(GroundTransfer6)
 };
-
-

@@ -1,7 +1,25 @@
 #include "States.h"
 
-void DeAlgaeRetract1::initialize_impl() {}
+void DeAlgaeRetract1::initialize_impl() {
+    ctx->elevatorServo.writeMicroseconds(elevatorBottomPosition);
+    ctx->AlgaeServo.write(algaeStowAngle);
+}
 
 State* DeAlgaeRetract1::loop_impl() {
-    return nullptr;
+    #if elevatorDownTime > deAlgaeRetractTime
+    if(this->currentTime >= elevatorDownTime)
+    #else
+    if(this->currentTime >= deAlgaeRetractTime)
+    #endif
+    {
+        if(ctx->eeSensor.getState()){
+            return new StowedEE(this->ctx);
+        }
+        if(ctx->groundSensor.getState()){
+            return new StowedGround(this->ctx);
+        }
+        return new StowedEmpty(this->ctx);
+    }
+    
+    return nullptr;    
 };
