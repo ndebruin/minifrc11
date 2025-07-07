@@ -18,10 +18,6 @@ enum FieldSide
     Red = 1
 };
 
-
-
-
-
 // autons!
 enum Auton 
 {
