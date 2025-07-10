@@ -9,6 +9,7 @@ class Sensor
         Sensor(uint8_t SensorPin) : pin(SensorPin) {}
 
         void setThreshold(uint16_t thresholdValue){ threshold = thresholdValue; };
+        void setReverse(bool reversal){ reverse = reversal; };
 
         uint8_t begin()
         {
@@ -21,9 +22,12 @@ class Sensor
         {
             rawReading = analogRead(pin);
             state = (rawReading > threshold);
+            if(reverse){
+                state = !state;
+            }
             return 0;
         }
-
+        
         bool getState(){ return state; };
         uint16_t getReading(){ return rawReading; };
 
@@ -33,4 +37,6 @@ class Sensor
 
         bool state;
         uint16_t rawReading;
+
+        bool reverse;
 };

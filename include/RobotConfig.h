@@ -53,6 +53,10 @@ constexpr uint8_t intakeEEMotorChannel = 4;
 constexpr uint8_t EESensorPin = 36;
 constexpr uint8_t GroundSensorPin = 39;
 
+constexpr uint16_t EESensorThreshold = 3100;
+constexpr bool EESensorReverse = true;
+constexpr uint16_t GroundSensorThreshold = 2200;
+
 ////////////////////////////////////////////////////////////////////// Elevator //////////////////////////////////////////////////////////////////////
 
 constexpr uint8_t elevatorServoChannel = 2;

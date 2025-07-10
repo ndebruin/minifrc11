@@ -59,8 +59,8 @@ constexpr long deAlgaeTimeout = 1000;
 
 ////////////////////////////////////////////////////////////////////// Intake //////////////////////////////////////////////////////////////////////
 
-constexpr float intakeStowAngle = 90.0;
-constexpr float intakeDeployAngle = 90.0;
+constexpr float intakeStowAngle = 6.0;
+constexpr float intakeDeployAngle = 184.0;
 constexpr float intakeHandoffAngle = 90.0;
 
 constexpr float intakeL1ReadyAngle = 90.0;
@@ -79,14 +79,14 @@ constexpr float rollerGroundHandoffSpeed = -1.0; // EE -> ground
 
 ////////////////////////////////////////////////////////////////////// Elevator //////////////////////////////////////////////////////////////////////
 
-constexpr uint16_t elevatorBottomPosition = 1500;
-constexpr uint16_t elevatorClearIntakePosition = 1500;
+constexpr uint16_t elevatorBottomPosition = 750;
+constexpr uint16_t elevatorClearIntakePosition = 1200;
 constexpr uint16_t elevatorClearEEPosition = 1500;
 
 constexpr uint16_t elevatorHandoffHighPosition = 1500; // clear everything pos
 constexpr uint16_t elevatorHandoffLowPosition = 1500; // actual handoff pos.
 
-constexpr uint16_t elevatorL4Position = 1500;
+constexpr uint16_t elevatorL4Position = 2000;
 
 constexpr uint16_t elevatorDeAlgaeL3Position = 1500;
 
@@ -94,22 +94,30 @@ constexpr uint16_t elevatorDeAlgaeL3Position = 1500;
 
 // these are gonna be kinda weird bc of the belt up-duction
 
-constexpr float armMiddleAngle = 90.0;
+constexpr float armMiddleAngle = 101.0;
 
 constexpr float armClimbAngle = 90.0;
 
-constexpr float armL1Angle = 90.0;
+constexpr float armL1FowardAngle = 70.0;
+constexpr float armL1BackwardAngle = 132.0;
 
-constexpr float armL2ReadyAngle = 90.0;
-constexpr float armL2ScoreAngle = 90.0;
+constexpr float armL2ForwardReadyAngle = 52.5;
+constexpr float armL2ForwardScoreAngle = 75.0;
+constexpr float armL2BackwardReadyAngle = 148.0;
+constexpr float armL2BackwardScoreAngle = 125.0;
 
-constexpr float armL3ReadyAngle = 90.0;
-constexpr float armL3ScoreAngle = 90.0;
+constexpr float armL3ForwardReadyAngle = 32.0;
+constexpr float armL3ForwardScoreAngle = 50.0;
+constexpr float armL3BackwardReadyAngle = 167.0;
+constexpr float armL3BackwardScoreAngle = 150.0;
 
-constexpr float armL4ReadyAngle = 90.0;
-constexpr float armL4ScoreAngle = 90.0;
+constexpr float armL4ForwardReadyAngle = 32.0;
+constexpr float armL4ForwardScoreAngle = 50.0;
+constexpr float armL4BackwardReadyAngle = 167.0;
+constexpr float armL4BackwardScoreAngle = 150.0;
 
-constexpr float armStationIntakeAngle = 90.0;
+constexpr float armForwardStationIntakeAngle = 90.0;
+constexpr float armBackwardStationIntakeAngle = 90.0;
 
 ////////////////////////////////////////////////////////////////////// Climber //////////////////////////////////////////////////////////////////////
 

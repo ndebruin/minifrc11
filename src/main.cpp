@@ -7,6 +7,7 @@
 #include <PestoLink-Receive.h>
 
 #include "RobotConfig.h"
+#include "../consts/PresetConstants.h"
 #include "RobotState.h"
 #include "Util.h"
 
@@ -14,7 +15,7 @@
 #include "Sensor.h"
 
 // subsystems
-#include "Drivetrain.h"
+// #include "Drivetrain.h"
 
 ////////////////////////////////////////////////////////////////////// Hardware Declarations //////////////////////////////////////////////////////////////////////
 
@@ -27,7 +28,15 @@ Sensor EESensor(EESensorPin);
 Sensor groundSensor(GroundSensorPin);
 
 // subsystem declerations
-Drivetrain drivetrain(&state, &odom, frontLeftMotorChannel, frontRightMotorChannel, backLeftMotorChannel, backRightMotorChannel);
+// Drivetrain drivetrain(&state, &odom, frontLeftMotorChannel, frontRightMotorChannel, backLeftMotorChannel, backRightMotorChannel);
+
+// servos and roller sensor
+NoU_Servo elevatorServo = NoU_Servo(elevatorServoChannel);
+NoU_Servo armServo = NoU_Servo(armServoChannel, 500, 2500);
+NoU_Servo climberServo = NoU_Servo(climberServoChannel);
+NoU_Servo AlgaeServo = NoU_Servo(algaeArmServoChannel, 500, 2500);
+NoU_Servo intakeServo = NoU_Servo(intakeServoChannel, 500, 2500);
+NoU_Motor intakeEEMotor = NoU_Motor(intakeEEMotorChannel);
 
 
 
@@ -54,26 +63,27 @@ void setup()
   // SerialBluetooth.begin(robotName);
   // AlfredoConnect.begin(SerialBluetooth);
 
-  // Serial.begin(9600);
+  pinMode(LED, OUTPUT);
 
   // start DS comms
   PestoLink.begin(robotName);
+
+Serial.begin(9600);
 
   // start sensors
   Wire.begin();
   odom.begin();
   EESensor.begin();
   groundSensor.begin();
+  groundSensor.setThreshold(GroundSensorThreshold);
+  EESensor.setThreshold(EESensorThreshold);
+  EESensor.setReverse(EESensorReverse);
 
   // configure subsystems
   configureSubsystems();
   
   // start subsystems
-  drivetrain.begin();
-  // superStructure.begin();
-  // intake.begin();
-  // algaeArm.begin();
-  // climber.begin();
+  // drivetrain.begin();
   
   // start advanced controllers
   
@@ -100,12 +110,42 @@ void asyncUpdate(){
   // let advanced controllers update
 
   // update from driver station
-  if(!PestoLink.update()){
+  if(!PestoLink.update()){}
     // disable if we disconnect
+
+  // }
+
+  if(PestoLink.buttonHeld(0)){
+    // intakeServo.write(intakeDeployAngle);
+    // armServo.write(armL4ForwardReadyAngle);
+    elevatorServo.writeMicroseconds(elevatorClearIntakePosition);
+  }
+  else if(PestoLink.buttonHeld(1)){
+    // armServo.write(armL4ForwardScoreAngle);
+  }
+  else{
+    // intakeServo.write(intakeStowAngle);
+    armServo.write(armMiddleAngle);
+    elevatorServo.writeMicroseconds(elevatorBottomPosition);
+    // armServo.write(armL4ForwardReadyAngle);
   }
 
+  if(PestoLink.buttonHeld(2)){
+    intakeEEMotor.set(eeRollerIntakeSpeed);
+  }
+  else if(PestoLink.buttonHeld(3)){
+    intakeEEMotor.set(eeRollerL1ScoreSpeed);
+  }
+  else{
+    intakeEEMotor.set(0.0);
+  }
+
+
   // update pestolink telem
-  updatePestoLink();
+  // updatePestoLink();
+  groundSensor.update();
+  EESensor.update();
+  digitalWrite(LED, EESensor.getState());
 
 }
 
@@ -122,5 +162,9 @@ void configureSubsystems()
   // drivetrain.setKV(kV);
   // drivetrain.setTeleopInputs(driveExp, deadzoneValue);
 
+
+}
+
+void updatePestoLink(){
 
 }
