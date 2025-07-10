@@ -7,8 +7,8 @@ enum RobotRunState
 {
     ESTOP = -1,
     Disabled = 0,
-    Teleop = 2,
-    Auto = 3
+    Teleop = 1,
+    Auto = 2
 };
 
 // basic configuration
@@ -22,7 +22,17 @@ enum FieldSide
 enum Auton 
 {
     // dawg IDK what's gonna go in here yet
-    Brick = 0
+    Brick,
+    Taxi,
+
+    L4SingleCenter,
+    L1SingleCenter,
+    
+    L4SingleProcessorSide,
+    L4SingleBargeSide,
+    
+    L4DoubleProcessorSide,
+    L4DoubleBargeSide,
 };
 
 
