@@ -116,25 +116,38 @@ void asyncUpdate(){
   // }
 
   if(PestoLink.buttonHeld(0)){
+    // climberServo.writeMicroseconds(climberDeployAngle);
     // intakeServo.write(intakeDeployAngle);
-    // armServo.write(armL4ForwardReadyAngle);
-    elevatorServo.writeMicroseconds(elevatorClearIntakePosition);
+    // intakeEEMotor.set(0.0);
+    // armServo.write(armL2ForwardReadyAngle);
+    // AlgaeServo.write(algaeInitialDeployAngle);
+    elevatorServo.writeMicroseconds(elevatorL4Position);
+
   }
   else if(PestoLink.buttonHeld(1)){
+    // climberServo.writeMicroseconds(climberClimbAngle);
+    // intakeServo.write(intakeL1ScoreAngle);
+    // intakeEEMotor.set(intakeRollerL1ScoreSpeed);
     // armServo.write(armL4ForwardScoreAngle);
+    elevatorServo.writeMicroseconds(elevatorDeAlgaeL3Position);
+    // AlgaeServo.write(algaeStowAngle);
   }
   else{
     // intakeServo.write(intakeStowAngle);
-    armServo.write(armMiddleAngle);
+    // intakeEEMotor.set(0.0);
+    // armServo.write(armMiddleAngle);
     elevatorServo.writeMicroseconds(elevatorBottomPosition);
     // armServo.write(armL4ForwardReadyAngle);
+    // AlgaeServo.write(algaeStartingConfigAngle);
   }
 
   if(PestoLink.buttonHeld(2)){
-    intakeEEMotor.set(eeRollerIntakeSpeed);
+    // intakeEEMotor.set(eeRollerIntakeSpeed);
+    // climberServo.writeMicroseconds(climberStowAngle);
   }
   else if(PestoLink.buttonHeld(3)){
-    intakeEEMotor.set(eeRollerL1ScoreSpeed);
+    // intakeEEMotor.set(eeRollerL1ScoreSpeed);
+    // climberServo.writeMicroseconds(climberStowAngle);
   }
   else{
     intakeEEMotor.set(0.0);
@@ -145,7 +158,7 @@ void asyncUpdate(){
   // updatePestoLink();
   groundSensor.update();
   EESensor.update();
-  digitalWrite(LED, EESensor.getState());
+  digitalWrite(LED, groundSensor.getState());
 
 }
 
