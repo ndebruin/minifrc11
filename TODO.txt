@@ -1,13 +1,7 @@
 - write big PoseUtil class that does things like:
-    - give Pose2D for given goal
-    - give Pose2D for shortest distance out of area (bonus if into as well)
-    - Am I in an area?
-    - Am I not in an area?
     - handle setting a start Pose2D with OdomInterface for given autos
 
 - write DrivetrainController
-    - handles autoalign to given Pose2D
-    - handles robot or field oriented driving
     - handles only using some user joystick inputs during autoalign
 
 - somehow modify inputParser to work for auto? (maybe??)
@@ -15,11 +9,14 @@
 
 
 *DO ALL THIS INDEPENDENT OF STATE MACHINE*
-- tune sensor thresholds
-- tune servo setpoints
-- tune roller speeds
-- tune delay timings
 - tune autoalign control loops
 
 *with state machine / much later*
 - tune timeouts
+
+
+// this autoaligns us to the nearest right branch
+int closestIndex = GeoHelper::findClosestPointIndex(&odom.getPose(), AllRightBranches, nullptr);
+Pose2D targetPose = GeoHelper::getBestApproachPose(&odom.getPose(), AllRightBranches[closestIndex]);
+
+drivetrainController.startAutoalign(transformPose(transformPose(targetPose, armL3ForwardToRobotTransform), robotToSensorTransform));

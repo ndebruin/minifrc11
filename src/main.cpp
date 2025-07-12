@@ -8,19 +8,29 @@
 
 #include "RobotConfig.h"
 #include "../consts/PresetConstants.h"
+#include "../consts/DrivetrainTuning.h"
 #include "RobotState.h"
 #include "Util.h"
 
 #include "OdomInterface.h"
 #include "Sensor.h"
 
+// state machine
+#include "Context.h"
+#include "../boilerplate/StateMachine/StateMachine.h"
+#include "States/States.h"
+
 // subsystems
-// #include "Drivetrain.h"
+#include "DrivetrainController.h"
+
+#include "Transforms.h"
+#include "GeoHelper.h"
 
 ////////////////////////////////////////////////////////////////////// Hardware Declarations //////////////////////////////////////////////////////////////////////
 
 // not really hardware but very needed
 RobotStateStorage state;
+InputParser inputParser (robotName, &state);
 
 // Sensor declerations
 OdomSensor odom(&Wire);
@@ -28,7 +38,7 @@ Sensor EESensor(EESensorPin);
 Sensor groundSensor(GroundSensorPin);
 
 // subsystem declerations
-// Drivetrain drivetrain(&state, &odom, frontLeftMotorChannel, frontRightMotorChannel, backLeftMotorChannel, backRightMotorChannel);
+DrivetrainController drivetrain = DrivetrainController(&state, &odom, frontLeftMotorChannel, frontRightMotorChannel, backLeftMotorChannel, backRightMotorChannel);
 
 // servos and roller sensor
 NoU_Servo elevatorServo = NoU_Servo(elevatorServoChannel);
@@ -37,6 +47,23 @@ NoU_Servo climberServo = NoU_Servo(climberServoChannel);
 NoU_Servo AlgaeServo = NoU_Servo(algaeArmServoChannel, 500, 2500);
 NoU_Servo intakeServo = NoU_Servo(intakeServoChannel, 500, 2500);
 NoU_Motor intakeEEMotor = NoU_Motor(intakeEEMotorChannel);
+
+Context ctx = {
+  .elevatorServo = elevatorServo,
+  .armServo = armServo,
+  .climberServo = climberServo,
+  .AlgaeServo = AlgaeServo,
+  .intakeServo = intakeServo,
+  .intakeEEMotor = intakeEEMotor,
+  .eeSensor = EESensor,
+  .groundSensor = groundSensor,
+  .robotStateStorage = state,
+  .odomSensor = odom,
+  .inputs = inputParser,
+  .drivetrain = drivetrain
+};
+
+StateMachine stateMachine(new StowedEmpty(&ctx));
 
 
 
@@ -79,14 +106,17 @@ Serial.begin(9600);
   EESensor.setThreshold(EESensorThreshold);
   EESensor.setReverse(EESensorReverse);
 
+  AlgaeServo.write(algaeStartingConfigAngle);
+
   // configure subsystems
-  configureSubsystems();
+  // configureSubsystems();
   
   // start subsystems
-  // drivetrain.begin();
+  drivetrain.setInversions(false, false, false, false);
+
   
   // start advanced controllers
-  
+  stateMachine.initialize();
 
 }
 
@@ -95,7 +125,8 @@ Serial.begin(9600);
 void loop() 
 {
   asyncUpdate(); // updates all the things that need to be updated every loop regardless of anything else
-
+  PestoLink.printTerminal(printPose(odom.getPose()).c_str());
+  delay(10);
 
 }
 
@@ -108,57 +139,82 @@ void asyncUpdate(){
   
 
   // let advanced controllers update
+  if(state.isEnabled()){
+    drivetrain.update();
+    stateMachine.loop();
+  }
+  else{
+    drivetrain.stop();
+  }
+  
+  
+  inputParser.update();
 
-  // update from driver station
-  if(!PestoLink.update()){}
-    // disable if we disconnect
+  if(state.robotState == RobotRunState::Auto){
+    switch(state.auton){
+      case Brick:
+        break;
+      case Taxi:
+        drivetrain.startAutoalign(
+          transformPose(
+            transformPose(
+              ReefBranchDRight, armL3ForwardToRobotTransform)
+              , robotToSensorTransform));
+          if(drivetrain.isInPosition()){
+            drivetrain.stop();
+            break;
+          }
+        break;
+    };
+  }
+
+
+
+  // if(PestoLink.buttonHeld(0)){
+  //   // climberServo.writeMicroseconds(climberDeployAngle);
+  //   // intakeServo.write(intakeDeployAngle);
+  //   // intakeEEMotor.set(0.0);
+  //   // armServo.write(armL2ForwardReadyAngle);
+  //   // AlgaeServo.write(algaeInitialDeployAngle);
+  //   elevatorServo.writeMicroseconds(elevatorL4Position);
 
   // }
+  // else if(PestoLink.buttonHeld(1)){
+  //   // climberServo.writeMicroseconds(climberClimbAngle);
+  //   // intakeServo.write(intakeL1ScoreAngle);
+  //   // intakeEEMotor.set(intakeRollerL1ScoreSpeed);
+  //   // armServo.write(armL4ForwardScoreAngle);
+  //   elevatorServo.writeMicroseconds(elevatorDeAlgaeL3Position);
+  //   // AlgaeServo.write(algaeStowAngle);
+  // }
+  // else{
+  //   // intakeServo.write(intakeStowAngle);
+  //   // intakeEEMotor.set(0.0);
+  //   // armServo.write(armMiddleAngle);
+  //   elevatorServo.writeMicroseconds(elevatorBottomPosition);
+  //   // armServo.write(armL4ForwardReadyAngle);
+  //   // AlgaeServo.write(algaeStartingConfigAngle);
+  // }
 
-  if(PestoLink.buttonHeld(0)){
-    // climberServo.writeMicroseconds(climberDeployAngle);
-    // intakeServo.write(intakeDeployAngle);
-    // intakeEEMotor.set(0.0);
-    // armServo.write(armL2ForwardReadyAngle);
-    // AlgaeServo.write(algaeInitialDeployAngle);
-    elevatorServo.writeMicroseconds(elevatorL4Position);
-
-  }
-  else if(PestoLink.buttonHeld(1)){
-    // climberServo.writeMicroseconds(climberClimbAngle);
-    // intakeServo.write(intakeL1ScoreAngle);
-    // intakeEEMotor.set(intakeRollerL1ScoreSpeed);
-    // armServo.write(armL4ForwardScoreAngle);
-    elevatorServo.writeMicroseconds(elevatorDeAlgaeL3Position);
-    // AlgaeServo.write(algaeStowAngle);
-  }
-  else{
-    // intakeServo.write(intakeStowAngle);
-    // intakeEEMotor.set(0.0);
-    // armServo.write(armMiddleAngle);
-    elevatorServo.writeMicroseconds(elevatorBottomPosition);
-    // armServo.write(armL4ForwardReadyAngle);
-    // AlgaeServo.write(algaeStartingConfigAngle);
-  }
-
-  if(PestoLink.buttonHeld(2)){
-    // intakeEEMotor.set(eeRollerIntakeSpeed);
-    // climberServo.writeMicroseconds(climberStowAngle);
-  }
-  else if(PestoLink.buttonHeld(3)){
-    // intakeEEMotor.set(eeRollerL1ScoreSpeed);
-    // climberServo.writeMicroseconds(climberStowAngle);
-  }
-  else{
-    intakeEEMotor.set(0.0);
-  }
+  // if(PestoLink.buttonHeld(2)){
+  //   // intakeEEMotor.set(eeRollerIntakeSpeed);
+  //   // climberServo.writeMicroseconds(climberStowAngle);
+  // }
+  // else if(PestoLink.buttonHeld(3)){
+  //   // intakeEEMotor.set(eeRollerL1ScoreSpeed);
+  //   // climberServo.writeMicroseconds(climberStowAngle);
+  // }
+  // else{
+  //   intakeEEMotor.set(0.0);
+  // }
 
 
   // update pestolink telem
   // updatePestoLink();
   groundSensor.update();
   EESensor.update();
-  digitalWrite(LED, groundSensor.getState());
+  odom.update();
+  // digitalWrite(LED, groundSensor.getState());
 
 }
 
@@ -169,14 +225,6 @@ double deadzone(double raw, double minValue){
   return raw;
 }
 
-
-void configureSubsystems()
-{
-  // drivetrain.setKV(kV);
-  // drivetrain.setTeleopInputs(driveExp, deadzoneValue);
-
-
-}
 
 void updatePestoLink(){
 

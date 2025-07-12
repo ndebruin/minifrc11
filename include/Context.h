@@ -29,6 +29,8 @@ struct Context {
 
     InputParser inputs;
 
+    DrivetrainController drivetrain;
+
     // most other stuff (values for actuators) 
     // is pulled from "PresetConstants.h"
 };

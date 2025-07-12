@@ -6,13 +6,19 @@
 #include <PestoLink-Receive.h>
 #include "Util.h"
 #include "RobotConfig.h"
+#include "RobotState.h"
 
 
 class InputParser
 {
 public:
-    InputParser(const char* btName){ PestoLink.begin(btName); };
+    InputParser(const char* btName, RobotStateStorage* stateStorage) : btname(btName), state(stateStorage) {};
 
+
+    void begin(){
+        PestoLink.begin(btname);
+    };
+    
     bool update()
     {
         bool pestoStatus = PestoLink.update();
@@ -27,7 +33,7 @@ public:
         else if(PestoLink.buttonHeld(buttonL3)){ goalLocationY = L3Branch; }
         else if(PestoLink.buttonHeld(buttonL4)){ goalLocationY = L4Branch; }
 
-        return pestoStatus;
+        
 
         // execute buttons
         if(PestoLink.buttonHeld(buttonExecLeft)){
@@ -79,6 +85,21 @@ public:
         else{
             execute = false;
         }
+
+        if(PestoLink.keyHeld(Key::Space)){
+            state->robotState = RobotRunState::Disabled;
+        }
+
+        if(PestoLink.keyHeld(Key::Enter)){
+            state->robotState = RobotRunState::Teleop;
+        }
+
+        if(PestoLink.keyHeld(Key::Q)){
+            state->robotState = RobotRunState::Auto;
+            state->auton = Auton::Taxi;
+        }
+
+        return pestoStatus;
     }
 
     bool shouldExecute(){ return execute; };
@@ -96,6 +117,10 @@ private:
 
     Pose2D joystickValues;
 
+    const char* btname;
+
     bool execute;
+    
+    RobotStateStorage* state;
 
 };

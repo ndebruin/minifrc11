@@ -26,15 +26,23 @@ public:
     void setKV(double kV){ nou_drivetrain.setMinimumOutput(kV); _kV = kV; };
     void setTeleopInputs(double exp, double deadband){ inputExponent = exp; inputDeadband = deadband; };
 
+    void setInversions(bool FL, bool FR, bool BL, bool BackR){
+        frontLeftMotor.setInverted(FL);
+        frontRightMotor.setInverted(FR);
+        backLeftMotor.setInverted(BL);
+        backRightMotor.setInverted(BackR);
+    };
+
     void stop()
     {
         command.x = 0.0; command.y = 0.0; command.theta = 0.0;
+        autoAligning = false;
         applyCommand();
     };
 
     void update(){
         // disable status
-        if(robotState.isEnabled() == false){
+        if(robotState->isEnabled() == false){
             stop();
             return;
         }
@@ -52,16 +60,17 @@ public:
     void teleopDrive(Pose2D driverInput)
     {
         // early return protecting from auto
-        if(robotState.robotState == RobotRunState::Auto){
+        if(robotState->robotState == RobotRunState::Auto){
             return;
         }
-        
+        double omega = driverInput.theta;
         if(fieldOriented){
+            driverInput.theta = odomSensor->getPose().theta*DEG_TO_RAD;
             driverInput = fieldToRobot(driverInput);
         }
         command.x = applyInputCurve(driverInput.x);
         command.y = applyInputCurve(driverInput.y);
-        command.theta = applyInputCurve(driverInput.theta);
+        command.theta = applyInputCurve(omega);
     };
 
     void startAutoalign(Pose2D target){
@@ -76,7 +85,7 @@ public:
 private:
     NoU_Motor frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
     NoU_Drivetrain nou_drivetrain;
-    RobotStateStorage robotState;
+    RobotStateStorage* robotState;
 
     OdomSensor* odomSensor;
 

@@ -45,6 +45,14 @@ struct Pose2D {
     double theta; // DEGREES
 };
 
+Pose2D transformPose(Pose2D target, Pose2D addition){
+    Pose2D transformedPose;
+    transformedPose.x = target.x + addition.x;
+    transformedPose.y = target.y + addition.y;
+    transformedPose.theta = target.theta + addition.theta;
+    return transformedPose;
+}
+
 Pose2D fieldToRobot(Pose2D field)
 {
     Pose2D robot;
@@ -66,4 +74,9 @@ Pose2D robotToField(Pose2D robot)
 
 float floatmap(float val, float in_min, float in_max, float out_min, float out_max) {
     return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+
+String printPose(Pose2D Pose){
+    return "X: " + String(Pose.x) + " Y: " + String(Pose.y) + " Theta: " + String(Pose.theta);
 }

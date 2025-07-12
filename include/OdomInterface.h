@@ -3,12 +3,14 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include "Util.h"
+#include <PestoLink-Receive.h>
 
 #define I2C_ADDRESS 0x08
 #define CMD_GET_DATA 0x01
 #define CMD_RESET_POSE 0x02
 #define CMD_ZERO_YAW 0x03
 
+#define DEBUG
 
 class OdomSensor
 {
@@ -74,25 +76,31 @@ class OdomSensor
                 for (int i = 0; i < 24; i++) {
                     buffer[i] = interface->read();
                 }
+                double x, y, theta;
+                memcpy(&x, &buffer[0], 8);
+                memcpy(&y, &buffer[8], 8);
+                memcpy(&theta, &buffer[16], 8);
 
-                memcpy(&currentPose.x, &buffer[0], 8);
-                memcpy(&currentPose.y, &buffer[8], 8);
-                memcpy(&currentPose.theta, &buffer[16], 8);
+                currentPose.x = x;
+                currentPose.y = y;
+                currentPose.theta = theta;
+
 
                 if (status == 0x00) {
                     #ifdef DEBUG
-                        Serial.println("Sensor Data receieved successfully!");
+                        // PestoLink.printTerminal("Sensor Data receieved successfully!");
+                        PestoLink.printTerminal(String(y).c_str());
                     #endif
                     return 0;
                 } else {
                     #ifdef DEBUG
-                        Serial.println("Sensor returned error");
+                        PestoLink.printTerminal("Sensor returned error");
                     #endif
                     return 1;
                 }
             } else {
                 #ifdef DEBUG
-                    Serial.println("Incomplete response");
+                    PestoLink.printTerminal("Incomplete response");
                 #endif
                 return 2;
             }
