@@ -136,6 +136,9 @@ void asyncUpdate(){
   // update subsystems
 
   // update our pose
+  groundSensor.update();
+  EESensor.update();
+  odom.update();
   
 
   // let advanced controllers update
@@ -211,9 +214,7 @@ void asyncUpdate(){
 
   // update pestolink telem
   // updatePestoLink();
-  groundSensor.update();
-  EESensor.update();
-  odom.update();
+
   // digitalWrite(LED, groundSensor.getState());
 
 }

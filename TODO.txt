@@ -1,5 +1,4 @@
-- write big PoseUtil class that does things like:
-    - handle setting a start Pose2D with OdomInterface for given autos
+
 
 - write DrivetrainController
     - handles only using some user joystick inputs during autoalign
@@ -13,6 +12,8 @@
 
 *with state machine / much later*
 - tune timeouts
+
+- reset pose with desired position when selecting auto
 
 
 // this autoaligns us to the nearest right branch
