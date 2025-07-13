@@ -1,6 +1,8 @@
 #include "States.h"
 
-void StowedEE::initialize_impl() {}
+void StowedEE::initialize_impl() {
+    return;
+}
 
 State* StowedEE::loop_impl() {
     

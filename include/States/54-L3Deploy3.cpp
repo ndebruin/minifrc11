@@ -19,9 +19,9 @@ State* L3Deploy3::loop_impl() {
     }
 
     
-    if(ctx->drivetrainController.inPosition() FULL_AUTO !ctx->inputs.shouldExecute()){
-        return new L3Score(this->ctx);
-    }
+    // if(ctx->drivetrainController.inPosition() FULL_AUTO !ctx->inputs.shouldExecute()){
+    //     return new L3Score(this->ctx);
+    // }
 
     return nullptr;
 };

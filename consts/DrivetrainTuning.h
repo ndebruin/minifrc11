@@ -8,7 +8,7 @@
 constexpr double kV = 0.0; // minimum value to overcome friction 
                // determined experimentally
 
-constexpr double driveExp = 1.5; // control "squaring" value to get more control at the low end
+constexpr double driveExp = 1.0; // control "squaring" value to get more control at the low end
 
 // strafe parameters
 constexpr double linX_kS = 0.0;

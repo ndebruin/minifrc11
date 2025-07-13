@@ -67,7 +67,7 @@ constexpr float intakeDeployAngle = 184.0;
 constexpr float intakeHandoffAngle = 35.0;
 
 constexpr float intakeL1ReadyAngle = 90.0;
-constexpr float intakeL1ScoreAngle = 100.0;
+constexpr float intakeL1ScoreAngle = 97.0;
 
 //////////////////////////////////////////// EE/Intake Roller //////////////////////////////////////////////////////////////////////
 
@@ -120,7 +120,7 @@ constexpr float armL4BackwardReadyAngle = 167.0;
 constexpr float armL4BackwardScoreAngle = 150.0;
 
 constexpr float armForwardStationIntakeAngle = 90.0;
-constexpr float armBackwardStationIntakeAngle = 90.0;
+constexpr float armBackwardStationIntakeAngle = 155.0;
 
 ////////////////////////////////////////////////////////////////////// Climber //////////////////////////////////////////////////////////////////////
 
@@ -134,7 +134,7 @@ constexpr uint16_t climberClimbAngle = 2200;
 
 constexpr float algaeStartingConfigAngle = 18.0; // only used for legality (& maybe climb)
 constexpr float algaeStowAngle = 175.0;
-constexpr float algaeInitialDeployAngle = 83.0;
+constexpr float algaeInitialDeployAngle = 75.0;
 constexpr float algaeFinalDeployAngle = 135.0;
 
 constexpr uint8_t deAlgaefyAttempts = 2;

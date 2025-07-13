@@ -1,8 +1,10 @@
 #include "States.h"
 
-void DeAlgaefy::initialize_impl() {}
+void DeAlgaefy1::initialize_impl() {
+    return;
+}
 
-State* DeAlgaefy::loop_impl() {
+State* DeAlgaefy1::loop_impl() {
     
     if(counter < deAlgaefyAttempts){
         if(ctx->AlgaeServo.getDegrees() == algaeInitialDeployAngle){

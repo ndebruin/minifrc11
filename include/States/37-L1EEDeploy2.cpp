@@ -1,7 +1,7 @@
 #include "States.h"
 
 void L1EEDeploy2::initialize_impl() {
-    ctx->armServo.write(armL1Angle);
+    ctx->armServo.write(armL1FowardAngle);
 }
 
 State* L1EEDeploy2::loop_impl() {

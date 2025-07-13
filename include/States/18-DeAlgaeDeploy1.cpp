@@ -1,9 +1,9 @@
 #include "States.h"
 
 void DeAlgaeDeploy1::initialize_impl() {
-    if(ctx->fieldPositionParser.algaeTarget() == L3){
-        ctx->elevatorServo.writeMicroseconds(elevatorDeAlgaeL3Position);
-    }
+    // if(ctx->fieldPositionParser.algaeTarget() == L3){
+    //     ctx->elevatorServo.writeMicroseconds(elevatorDeAlgaeL3Position);
+    // }
     ctx->AlgaeServo.write(algaeInitialDeployAngle);
     // ctx->drivetrainController.startAutoalign(Algae);
 }

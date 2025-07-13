@@ -1,8 +1,8 @@
 #include "States.h"
 
 void L3Score::initialize_impl() {
-    ctx->armServo.write(armL3ScoreAngle);
-    ctx->driveTrainController.stopAutoalign();
+    ctx->armServo.write(armL3ForwardScoreAngle);
+    // ctx->driveTrainController.stopAutoalign();
 }
 
 State* L3Score::loop_impl() {

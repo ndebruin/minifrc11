@@ -22,22 +22,22 @@ constexpr uint8_t axisLinX = 0;
 constexpr uint8_t axisAngZ = 2;
 
 // ABXY
-constexpr uint8_t buttonL4 = 0;
-constexpr uint8_t buttonL3 = 1;
-constexpr uint8_t buttonL2 = 2;
-constexpr uint8_t buttonL1 = 3;
+constexpr uint8_t buttonL4 = 12;
+constexpr uint8_t buttonL3 = 14;
+constexpr uint8_t buttonL2 = 15;
+constexpr uint8_t buttonL1 = 13;
 
 // shoulder buttons
-constexpr uint8_t buttonDeAlgae = 5;
-constexpr uint8_t buttonGroundIntake = 6;
+constexpr uint8_t buttonDeAlgae = 4;
+constexpr uint8_t buttonGroundIntake = 5;
 
 // triggers
-constexpr uint8_t buttonExecLeft = 7;
-constexpr uint8_t buttonExecRight = 8;
+constexpr uint8_t buttonExecLeft = 6;
+constexpr uint8_t buttonExecRight = 7;
 
 // dpad somewhere
-constexpr uint8_t buttonStationIntake = 10;
-constexpr uint8_t buttonTriggerClimb = 6; // i still dk how climb is gonna work
+constexpr uint8_t buttonStationIntake = 13;
+constexpr uint8_t buttonTriggerClimb = 12; // i still dk how climb is gonna work
 
 ////////////////////////////////////////////////////////////////////// Pose Estimator //////////////////////////////////////////////////////////////////////
 constexpr uint8_t scl = 21;

@@ -3,7 +3,7 @@
 void L1GroundScore::initialize_impl() {
     ctx->intakeServo.write(intakeL1ScoreAngle);
     ctx->intakeEEMotor.set(intakeRollerL1ScoreSpeed);
-    ctx->drivetrainController.stopAutoalign();
+    // ctx->drivetrainController.stopAutoalign();
 }
 
 State* L1GroundScore::loop_impl() {

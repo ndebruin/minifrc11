@@ -3,7 +3,7 @@
 #include <Arduino.h>
 #include "../../boilerplate/StateMachine/State.h"
 #include "../../boilerplate/StateMachine/StateMachine.h"
-#include "../Context.h"
+#include "../../include/Context.h"
 #include "../../consts/PresetConstants.h"
 
 enum StateId {
@@ -41,7 +41,7 @@ enum StateId {
     // DeAlgae States
     ID_DeAlgaeDeploy1, // start autoalign, elevator & stick up/out, time delay
     ID_DeAlgaeDeployed, // when autoalign good or request removed, stop autoalign & move forward in states
-    ID_DeAlgaefy, // move stick up, (maybe) move bot back slightly?
+    ID_DeAlgaefy1, // move stick up, (maybe) move bot back slightly?
     ID_DeAlgaeRetract1, // elevator down, stick in
 
     // climb states
@@ -138,12 +138,16 @@ using StateMachine = TStateMachine<Context, StateId, decltype(&millis)>;
                                                                                \
   private:                                                                     \
     void initialize_impl() override;                                           \
-    State *loop_impl() override;
+    State *loop_impl() override;                                               
 
 
 
 class StowedEmpty : public State {
     STATE_INNER(StowedEmpty)
+    
+    public:
+    ~StowedEmpty() override;
+
 };
 
 class StowedGround : public State {
@@ -222,8 +226,8 @@ class DeAlgaeDeployed : public State {
     STATE_INNER(DeAlgaeDeployed)
 };
 
-class DeAlgaefy : public State {
-    STATE_INNER(DeAlgaefy)
+class DeAlgaefy1 : public State {
+    STATE_INNER(DeAlgaefy1)
 
     uint8_t counter = 9;
 };

@@ -2,7 +2,7 @@
 
 void L1EEScore::initialize_impl() {
     ctx->intakeEEMotor.set(eeRollerL1ScoreSpeed);
-    ctx->driveTrainController.stopAutoalign();
+    // ctx->driveTrainController.stopAutoalign();
 }
 
 State* L1EEScore::loop_impl() {

@@ -100,7 +100,7 @@ private:
     // teleop params
     double inputExponent;
     double inputDeadband;
-    bool fieldOriented;
+    bool fieldOriented = false;
     
     Pose2D command; // ROBOT RELATIVE
 

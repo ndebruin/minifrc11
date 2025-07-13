@@ -19,9 +19,9 @@ State* L1EEDeploy3::loop_impl() {
     }
 
     
-    if(ctx->drivetrainController.inPosition() && !ctx->inputs.shouldExecute()){
-        return new L1GroundScore(this->ctx);
-    }
+    // if(ctx->drivetrainController.inPosition() && !ctx->inputs.shouldExecute()){
+    //     return new L1GroundScore(this->ctx);
+    // }
 
     return nullptr;
 };

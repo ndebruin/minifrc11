@@ -13,4 +13,6 @@ State* GroundTransfer4::loop_impl() {
     if(this->currentTime >= handoffTimeout){
         return new EETransfer3(this->ctx);
     }
+
+    return nullptr;
 };

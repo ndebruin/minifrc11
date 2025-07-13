@@ -7,6 +7,7 @@
 #include "Sensor.h"
 #include "OdomInterface.h"
 #include "InputParser.h"
+#include "DrivetrainController.h"
 
 struct Context {
     // actuators
@@ -29,7 +30,7 @@ struct Context {
 
     InputParser inputs;
 
-    DrivetrainController drivetrain;
+    // DrivetrainController drivetrain;
 
     // most other stuff (values for actuators) 
     // is pulled from "PresetConstants.h"

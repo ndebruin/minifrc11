@@ -1,6 +1,8 @@
 #include "States.h"
 
-void StowedGround::initialize_impl() {}
+void StowedGround::initialize_impl() {
+    return;
+}
 
 State* StowedGround::loop_impl() {
     

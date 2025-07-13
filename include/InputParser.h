@@ -24,8 +24,8 @@ public:
         bool pestoStatus = PestoLink.update();
 
         joystickValues.x = PestoLink.getAxis(axisLinX);
-        joystickValues.y = PestoLink.getAxis(axisLinY);
-        joystickValues.theta = PestoLink.getAxis(axisAngZ);
+        joystickValues.y = -PestoLink.getAxis(axisLinY);
+        joystickValues.theta = PestoLink.getAxis(axisAngZ)*0.8;
 
         // reef selection
         if(PestoLink.buttonHeld(buttonL1)){ goalLocationY = L1Trough; }
@@ -72,6 +72,7 @@ public:
         else if(PestoLink.buttonHeld(buttonGroundIntake)){
             goal = GroundIntake;
             execute = true;
+            // PestoLink.printTerminal("HELP");
         }
         else if(PestoLink.buttonHeld(buttonStationIntake)){
             goal = StationIntake;
@@ -85,6 +86,14 @@ public:
         else{
             execute = false;
         }
+
+        if(PestoLink.buttonHeld(9)){
+            state->robotState = RobotRunState::Teleop;
+        }
+
+        // if(PestoLink.buttonHeld(8)){
+            // 
+        // }
 
         if(PestoLink.keyHeld(Key::Space)){
             state->robotState = RobotRunState::Disabled;

@@ -2,7 +2,7 @@
 
 void L2Deploy2::initialize_impl() {
     // TO:DO: figure out arm angle for both sides
-    ctx->armServo.write(armL2ReadyAngle);
+    ctx->armServo.write(armL2ForwardReadyAngle);
 }
 
 State* L2Deploy2::loop_impl() {

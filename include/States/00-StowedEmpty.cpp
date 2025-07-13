@@ -1,12 +1,16 @@
 #include "States.h"
 
-void StowedEmpty::initialize_impl() {}// not doing anything in this case, but would otherwise move actuators in this part
+void StowedEmpty::initialize_impl() {
+    Serial.println("test");
+}// not doing anything in this case, but would otherwise move actuators in this part
     
 
 State* StowedEmpty::loop_impl() {
     
+    // PestoLink.printTerminal("we looping");
     // state transitions
     if(ctx->inputs.shouldExecute()){
+        PestoLink.printTerminal("help me please execute");
         if(ctx->inputs.getGoal() == GroundIntake){
             return new GroundDeploy1(this->ctx);
         }
@@ -35,3 +39,5 @@ State* StowedEmpty::loop_impl() {
     
     return nullptr;
 };
+
+StowedEmpty::~StowedEmpty() {}

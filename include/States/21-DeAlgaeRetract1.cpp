@@ -3,7 +3,7 @@
 void DeAlgaeRetract1::initialize_impl() {
     ctx->elevatorServo.writeMicroseconds(elevatorBottomPosition);
     ctx->AlgaeServo.write(algaeStowAngle);
-    ctx->drivetrainController.stopAutoalign();
+    // ctx->drivetrainController.stopAutoalign();
 }
 
 State* DeAlgaeRetract1::loop_impl() {

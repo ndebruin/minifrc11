@@ -5,10 +5,6 @@
 
 #include "Util.h"
 
-Pose2D applyTransforms(Pose2D inputPose, Goal goal){
-    
-}
-
 const Pose2D robotToSensorTransform = {-7.0, -7.5, 180.0};
 const Pose2D armL1ForwardToRobotTransform = {-21.154546, 101.663660, 0.0};
 const Pose2D armL2ForwardToRobotTransform = {-21.154546, 103.558785, 0.0};

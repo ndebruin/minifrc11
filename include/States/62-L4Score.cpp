@@ -1,8 +1,8 @@
 #include "States.h"
 
 void L4Score::initialize_impl() {
-    ctx->armServo.write(armL4ScoreAngle);
-    ctx->driveTrainController.stopAutoalign();
+    ctx->armServo.write(armL4ForwardScoreAngle);
+    // ctx->driveTrainController.stopAutoalign();
 }
 
 State* L4Score::loop_impl() {

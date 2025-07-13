@@ -1,7 +1,7 @@
 #include "States.h"
 
 void StationDeploy2::initialize_impl() {
-    ctx->armServo.write(armStationIntakeAngle);
+    ctx->armServo.write(armBackwardStationIntakeAngle);
 }
 
 State* StationDeploy2::loop_impl() {

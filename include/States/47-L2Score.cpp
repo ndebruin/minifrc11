@@ -1,8 +1,8 @@
 #include "States.h"
 
 void L2Score::initialize_impl() {
-    ctx->armServo.write(armL2ScoreAngle);
-    ctx->driveTrainController.stopAutoalign();
+    ctx->armServo.write(armL2ForwardScoreAngle);
+    // ctx->driveTrainController.stopAutoalign();
 }
 
 State* L2Score::loop_impl() {

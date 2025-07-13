@@ -1,7 +1,7 @@
 #include "States.h"
 
 void L3Deploy2::initialize_impl() {
-    ctx->armServo.write(armL3ReadyAngle);
+    ctx->armServo.write(armL3ForwardReadyAngle);
 }
 
 State* L3Deploy2::loop_impl() {

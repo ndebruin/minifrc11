@@ -1,7 +1,7 @@
 #include "States.h"
 
 void L4Deploy2::initialize_impl() {
-    ctx->armServo.write(armL4ReadyAngle);
+    ctx->armServo.write(armL4ForwardReadyAngle);
 }
 
 State* L4Deploy2::loop_impl() {
@@ -19,9 +19,9 @@ State* L4Deploy2::loop_impl() {
     }
 
     
-    if(ctx->drivetrainController.inPosition() FULL_AUTO !ctx->inputs.shouldExecute()){
-        return new L4Score(this->ctx);
-    }
+    // if(ctx->drivetrainController.inPosition() FULL_AUTO !ctx->inputs.shouldExecute()){
+    //     return new L4Score(this->ctx);
+    // }
 
     return nullptr;
 };

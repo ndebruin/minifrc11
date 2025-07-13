@@ -89,7 +89,7 @@ class OdomSensor
                 if (status == 0x00) {
                     #ifdef DEBUG
                         // PestoLink.printTerminal("Sensor Data receieved successfully!");
-                        PestoLink.printTerminal(String(y).c_str());
+                        // PestoLink.printTerminal(String(y).c_str());
                     #endif
                     return 0;
                 } else {
