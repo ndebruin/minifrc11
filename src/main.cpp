@@ -204,7 +204,7 @@ void asyncUpdate(){
         else if(target == 1){
           elevatorServo.writeMicroseconds(elevatorBottomPosition);
           armServo.write(armL1FowardAngle);
-          intakeEEMotor.set(eeRollerL1ScoreSpeed);
+          // intakeEEMotor.set(eeRollerL1ScoreSpeed);
         }
       
       intakeServo.write(intakeStowAngle);
